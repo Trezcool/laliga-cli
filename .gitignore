@@ -1,0 +1,11 @@
+
+# Python bytecode
+*.pyc
+*.pyo
+__pycache__
+
+# distutils / setuptools
+*.egg-info/
+
+.idea/
+.cache/

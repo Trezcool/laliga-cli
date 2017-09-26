@@ -27,8 +27,7 @@ class LaLigaTests(TestCase):
         ]
         table = Table()
         for result in results:
-            team1_score, team2_score = result.strip().split(sep=',')
-            table.update(team1_score, team2_score)
+            table.update(result)
 
         # teams with same points should be ordered alphabetically
         # Barcelona and Real Madrid should be first

@@ -18,10 +18,11 @@ class Table:
         self.first_place = []
         self.last_place = []
 
-    def update(self, team1_score: str, team2_score: str) -> None:
+    def update(self, result: str) -> None:
         """
         Updates the table's ranking with the result of the given fixture.
         """
+        team1_score, team2_score = result.strip().split(sep=',')
         team1, score1 = team1_score.strip().rsplit(sep=' ', maxsplit=1)
         team2, score2 = team2_score.strip().rsplit(sep=' ', maxsplit=1)
         score1 = int(score1)
@@ -81,14 +82,12 @@ def cli():
             result = click.prompt('Please enter a fixture result', default='')
             if not result:
                 break
-            team1_score, team2_score = result.strip().split(sep=',')
-            table.update(team1_score, team2_score)
+            table.update(result)
     else:
         filepath = click.prompt('\nPlease enter the file path', type=click.Path(exists=True))
         with open(filepath) as file:
-            for line in file.readlines():
-                team1_score, team2_score = line.strip().split(sep=',')
-                table.update(team1_score, team2_score)
+            for result in file.readlines():
+                table.update(result)
     # print ranking
     click.secho('|--------|---------------------------|--------|')
     click.secho('| #\t | {:25} | POINTS |'.format('TEAM'), bold=True)

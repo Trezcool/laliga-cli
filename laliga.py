@@ -45,7 +45,8 @@ class Table:
         # add positions to ranking (teams with same points should have same position)
         points = sorted({r[1] for r in ranking}, reverse=True)
         final_ranking = []
-        for pos, point in enumerate(points, start=1):
+        pos = 1
+        for point in points:
             # group teams by points and order them alphabetically
             teams = [(pos, r) for r in ranking if r[1] == point]
             alpha_sorted = sorted(teams, key=lambda x: x[1][0])
@@ -56,6 +57,7 @@ class Table:
                 self.first_place = teams_names
             else:
                 self.last_place = teams_names
+            pos += len(teams)  # increment position
         return final_ranking
 
     @property

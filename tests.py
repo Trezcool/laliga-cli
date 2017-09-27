@@ -41,3 +41,6 @@ class LaLigaTests(TestCase):
         last_pos = pos(final_ranking[table.size - 1])
         assert set(table.last_place) == {'Celta Vigo', 'Real Betis'}
         assert [team_res(r) for r in final_ranking if pos(r) == last_pos] == [('Celta Vigo', 0), ('Real Betis', 0)]
+
+        # check that positions are respected
+        assert [pos(r) for r in final_ranking] == [1, 1, 3, 4, 4, 4, 7, 7]
